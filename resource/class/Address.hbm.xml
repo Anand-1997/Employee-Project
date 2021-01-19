@@ -14,6 +14,4 @@
 		<property name="pincode" column="pincode" type="string"></property>
 		<many-to-one class ="com.ideas2it.employee.model.Employee" name="employee" column="employee_id" cascade="all" lazy="proxy"/>
 	</class>
-	
-
 </hibernate-mapping>

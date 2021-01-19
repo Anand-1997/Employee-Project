@@ -17,13 +17,12 @@ public class Address {
 	private String area;
 	private String city;
 	private String pincode;
-	//private int employeeId;
 	private Employee employee;
 
-
+	//Default Constructor
 	public Address() {}
 	
-	
+	//Parameterized Constructor
 	public Address(String street, String area, String city, String pincode) {
 		super();
 		this.street = street;
@@ -31,7 +30,6 @@ public class Address {
 		this.city = city;
 		this.pincode = pincode;
 	}
-
 
 	@Override
 	public String toString() {
@@ -46,23 +44,13 @@ public class Address {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	/*
-	 * public int getEmployeeId() { return employeeId; }
-	 * 
-	 * 
-	 * public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }
-	 */
-
+	
 	public Employee getEmployee() {
 		return employee;
 	}
-
-
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
-
 	public String getArea() {
 		return area;
 	}
@@ -87,53 +75,4 @@ public class Address {
 	public void setAddressId(String addressId) {
 		this.addressId = addressId;
 	}
-	
-	
-	
-
-	//default constructor
-	/*public Address() {
-	}
-
-	//argument-constructor to initialize fields  
-	public Address(String streetName, String areaName, String cityName, String pincodeNumber) {
-		this.street = streetName;
-		this.area = areaName;
-		this.city = cityName;
-		this.pincode = pincodeNumber;
-	}
-
-	public String toString() {
-		return "\n Address" + "\n" + " \t" + "Street =  " + getStreetDetails() + " \t" + " Area = " + getAreaDetails() + " \t" + " City =" + getCityName() + " \t" + " Pincode = " + getPincodeNumber();
-	}
-
-	public String getStreetDetails() {
-		return street;
-	}
-
-	public String getAreaDetails() {
-		return area;
-	}
-	public String getCityName() {
-		return city;
-	}
-	public String getPincodeNumber() {
-		return pincode;
-	}
-
-	public void setStreetDetails(String street) {
-		this.street = street;
-
-	}
-	public void setAreaDetails(String area) {
-		this.area = area;
-	}
-
-	public void setCityName(String city) {
-		this.city = city;
-	}
-
-	public void setPincodeNumber(String pincode) {
-		this.pincode = pincode;
-	}*/
 }

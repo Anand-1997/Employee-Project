@@ -8,49 +8,35 @@
 package com.ideas2it.project.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-
-import com.ideas2it.project.model.Project;
-//import com.ideas2it.dbconnection.DataBaseConnection;
-import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
+import com.ideas2it.project.model.Project;
 import com.ideas2it.hibernateconnection.SessionManagement;
-
-
 
 /*
  * this class contains the list of Projects and the details of Employees
  * all CRUD operations are done in this class
  * this class will be accessed by services
  */
-
 public class ProjectDao {
-
-    //DataBaseConnection dbConnection = DataBaseConnection.getInstance();
-   
+  
     /*
      * Used to insert the values into the database given
      * by the values provided by user
      * @param it gets the parameter of Employees type to create the person
      */   
-
-    public void insertProject(Project project)  {
+    public void insertProject(Project project,List <Integer> employeesId)  {
     	Session session = null;
         Transaction transaction = null;
+        Set<Employee> employeeSet = new HashSet<Employee>();
         try {
             System.out.println("Inside Dao");
             SessionFactory sessionFactory = SessionManagement.getSessionFactory();
@@ -58,6 +44,14 @@ public class ProjectDao {
             session = sessionFactory.openSession();
             project.setStatus("active");
             transaction = session.beginTransaction();
+            for(int employeeId : employeesId)
+            {
+	            Query query = session.createQuery("from Employee employee where employee.eid = :employeeId");
+	            query.setParameter("employeeId", employeeId);
+	            Employee employee  = (Employee) query.uniqueResult();
+	            employeeSet.add(employee);
+            }
+            project.setEmployee(employeeSet);
             session.save(project); 
             transaction.commit();
         } catch (Exception ex) {

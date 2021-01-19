@@ -1,7 +1,7 @@
 package com.ideas2it.hibernateconnection;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.SessionFactory;
 
 /**
  * Session management is used to configure session factory

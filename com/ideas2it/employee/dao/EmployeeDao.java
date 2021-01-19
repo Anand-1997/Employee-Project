@@ -7,23 +7,22 @@
 **/
 package com.ideas2it.employee.dao;
 
-import com.ideas2it.hibernateconnection.SessionManagement;
-import com.ideas2it.employee.model.Address;
-import com.ideas2it.employee.model.Employee;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
+import com.ideas2it.employee.model.Address;
+import com.ideas2it.employee.model.Employee;
+import com.ideas2it.hibernateconnection.SessionManagement;
 
 /*
- * this class contains the list of Employees and the details of Employees
+ * This class contains the list of Employees and the details of Employees
  * all CRUD operations are done in this class
  * this class will be accessed by services
  */
@@ -39,25 +38,25 @@ public class EmployeeDao {
      */   
 
     public void insertEmployee(Employee employee,Address currentAddress, Address permanentAddress) {
-            Session session = null;
-            Transaction transaction = null;
-            try {
-                SessionFactory sessionFactory = SessionManagement.getSessionFactory();
-                System.out.println(sessionFactory);
-                session = sessionFactory.openSession();
-                employee.setStatus("active");
-                transaction = session.beginTransaction();
-                int id = (int) session.save(employee); 
-                employee.setEid(id);
-                currentAddress.setEmployee(employee);
-                permanentAddress.setEmployee(employee);
-                Set addressSet = new HashSet();
-                addressSet.add(currentAddress);
-                addressSet.add(permanentAddress);
-                employee.setAddress(addressSet);
-                session.save(currentAddress);
-                session.save(permanentAddress);
-                transaction.commit();
+    	Session session = null;
+    	Transaction transaction = null;
+        try {
+            SessionFactory sessionFactory = SessionManagement.getSessionFactory();
+            System.out.println(sessionFactory);
+            session = sessionFactory.openSession();
+            employee.setStatus("active");
+            transaction = session.beginTransaction();
+            int id = (int) session.save(employee); 
+            employee.setEid(id);
+            currentAddress.setEmployee(employee);
+            permanentAddress.setEmployee(employee);
+            Set addressSet = new HashSet();
+            addressSet.add(currentAddress);
+            addressSet.add(permanentAddress);
+            employee.setAddress(addressSet);
+            session.save(currentAddress);
+            session.save(permanentAddress);
+            transaction.commit();
             } catch (Exception ex) {
                 System.out.println("unable to add User value" + ex);
             } finally {
@@ -127,7 +126,7 @@ public class EmployeeDao {
     public void listEmployee() {
         Session session = null;
         Transaction transaction = null;
-        List<Employee> employeeList = new ArrayList();
+        List<Employee> employeeList = new ArrayList<Employee>();
         try {
             System.out.println("Inside Dao");
             SessionFactory sessionFactory = SessionManagement.getSessionFactory();
@@ -175,7 +174,7 @@ public class EmployeeDao {
         } finally {
             session.close();
         }
-}
+    }
         
 }
 

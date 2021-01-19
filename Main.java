@@ -1,18 +1,6 @@
-//package com.ideas2it;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//import com.ideas2it.dbconnection.HibernateSessionFactory;
 import com.ideas2it.employee.controller.EmployeeController;
-//import com.ideas2it.project.controller.ProjectController;
-import com.ideas2it.employee.dao.EmployeeDao;
-//import com.ideas2it.project.dao.ProjectDao;
-//import com.ideas2it.employee.model.Address;
-//import com.ideas2it.employee.model.Employee;
-//import com.ideas2it.project.model.Project;
-import com.ideas2it.employee.service.EmployeeService;
-//import com.ideas2it.project.service.ProjectService;
 import com.ideas2it.project.controller.ProjectController;
 
 
@@ -26,8 +14,7 @@ import com.ideas2it.project.controller.ProjectController;
 public class Main {
 
     public static void main(String[] args) {
-        //Main main = new Main();
-        /*To create the object for Employeecontroller class */
+        /*To create the object for EmployeeController class */
         EmployeeController employeeController = new EmployeeController();         
         /* To create object for ProjectController class */  
         ProjectController projectController = new ProjectController();

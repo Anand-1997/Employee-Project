@@ -7,19 +7,30 @@
 **/
 package com.ideas2it.project.controller;
 
-import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-import com.ideas2it.project.service.ProjectService;
 import com.ideas2it.project.model.Project;
+import com.ideas2it.project.service.ProjectService;
 
+
+/*
+ * This class gives the user to perform all the
+ * given CRUD operations are done in this class
+ * this class will be accessed by services
+ */
 public class ProjectController {
-	static ProjectService projectService = new ProjectService();
-	static Project project = new Project();
-    public static void projectControl() {
+	ProjectService projectService = new ProjectService();
+	Project project = new Project();
+	
+	/* 
+     * This method consists of three parameters list for storing, 
+	 * Displays different choices and user provides options and
+	 * It contains switch method where when the user enters a option based 
+	 * on option the cases get called 
+     */
+    public void projectControl() {
 		int options;
 		try {
 			do { 
@@ -35,9 +46,17 @@ public class ProjectController {
 				switch (options) {			
 				case 1:
 					getInfo();
-					System.out.println("Enter the employee id you wish to map into project: ");
-					int id = scanner.nextInt();
-					projectService.insertProject(project,id); //Calls the insert method
+					System.out.println("Enter the no. of employees you wish to map");
+					int n = scanner.nextInt();
+					int i =0;
+					List<Integer> employeesId = new ArrayList<Integer>();
+					for(i = 0 ; i < n ; i++)
+					{
+						System.out.println("Enter the employee id you wish to map into project: ");
+						int id = scanner.nextInt();
+						employeesId.add(id);
+					}
+					projectService.insertProject(project,employeesId); //Calls the insert method
 					break;
 				case 2:
 					int projectId = getProjectId();
@@ -66,7 +85,7 @@ public class ProjectController {
      * This method is used to get values for the insert method and
      * provide the neccessary inputs. 
      */
-	public static Project getInfo() {
+	public Project getInfo() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Project Name: ");
 		String name = scanner.nextLine();
@@ -82,7 +101,7 @@ public class ProjectController {
 	/*
      * This method fetches the Employee ID from user 
      */
-	public static int getProjectId() {
+	public int getProjectId() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please enter the ID of an employee");
 		int projectId = scanner.nextInt();
@@ -93,7 +112,7 @@ public class ProjectController {
      * The update method is used to select a record based on the key the user 
 	 * provides, finds and then updates the values 
      */
-	 public static Project updateProject() {
+	 public Project updateProject() {
 	     System.out.println("Type ID to be modified");
 	     Scanner scanner = new Scanner(System.in);
 	     String id = scanner.nextLine();
@@ -108,5 +127,4 @@ public class ProjectController {
 	     project = projectService.setProjectDetails(name,dueDate,managerName );
 	     return project;
     } 
-
 }
