@@ -12,6 +12,7 @@ import java.util.Scanner;
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
 import com.ideas2it.employee.service.EmployeeService;
+import com.ideas2it.employee.service.EmployeeServiceImpl;
 
 /*
  * This class gives the user to perform all the
@@ -20,7 +21,7 @@ import com.ideas2it.employee.service.EmployeeService;
  */
 
 public class EmployeeController {
-	EmployeeService employeeService = new EmployeeService();
+	EmployeeService employeeService = new EmployeeServiceImpl();
 	Employee employee = new Employee();
 	
 	/* 
@@ -71,7 +72,7 @@ public class EmployeeController {
 				}
 		} while(options!=6);
 		} catch(Exception e) {
-			System.out.println("Invalid entry");
+			System.out.println(e);
 		}
     }
     
@@ -79,7 +80,7 @@ public class EmployeeController {
      * This method is used to get values for the insert method and
      * provide the neccessary inputs. 
      */
-	public Employee getInfo() {
+	public Employee getInfo() throws Exception {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter First Name: ");
 		String firstName = scanner.nextLine();
@@ -112,7 +113,7 @@ public class EmployeeController {
      * This method is used to get values for the Address method and
      * provide the neccessary inputs. 
      */
-	public Address getEmployeeAddress() {
+	public Address getEmployeeAddress() throws Exception {
 		Address address = new Address();
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Street: ");	
@@ -131,7 +132,7 @@ public class EmployeeController {
      * This method is used to provide values for the update method and
      * provide the neccessary inputs. 
      */
-	public  Employee updateInfo() {
+	public  Employee updateInfo() throws Exception {
 		System.out.println("modification Values");
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Employee Id: ");

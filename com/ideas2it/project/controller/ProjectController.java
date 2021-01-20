@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import com.ideas2it.project.model.Project;
 import com.ideas2it.project.service.ProjectService;
+import com.ideas2it.project.service.ProjectServiceImpl;
 
 
 /*
@@ -21,7 +22,7 @@ import com.ideas2it.project.service.ProjectService;
  * this class will be accessed by services
  */
 public class ProjectController {
-	ProjectService projectService = new ProjectService();
+	ProjectService projectService = new ProjectServiceImpl();
 	Project project = new Project();
 	
 	/* 
@@ -85,7 +86,7 @@ public class ProjectController {
      * This method is used to get values for the insert method and
      * provide the neccessary inputs. 
      */
-	public Project getInfo() {
+	public Project getInfo() throws Exception {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Project Name: ");
 		String name = scanner.nextLine();
@@ -112,7 +113,7 @@ public class ProjectController {
      * The update method is used to select a record based on the key the user 
 	 * provides, finds and then updates the values 
      */
-	 public Project updateProject() {
+	 public Project updateProject() throws Exception {
 	     System.out.println("Type ID to be modified");
 	     Scanner scanner = new Scanner(System.in);
 	     String id = scanner.nextLine();
