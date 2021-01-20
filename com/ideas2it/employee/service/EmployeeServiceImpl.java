@@ -83,6 +83,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.println(employee);
         employeeDao.updateEmployee(employee,currentAddress,permanentAddress);
 	}
+	
+	/* 
+     * The assign method is used to select a record based on the key the user 
+	 * provides, finds and then assigns the values 
+     */
+	public void assignProject(int employeeId, int projectId) throws Exception {
+        employeeDao.assignProject(employeeId, projectId);
+	}
     /* 
      * This method validates the given date of birth  
 	 * with the given format and return date of birth 

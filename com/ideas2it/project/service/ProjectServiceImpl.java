@@ -68,10 +68,18 @@ public class ProjectServiceImpl implements ProjectService {
      * The update method is used to select a record based on the key the user 
 	 * provides, finds and then updates the values 
      */
-	/*public void updateProject(Project project){
-		System.out.println("Inserted");
-        employeeDao.updateProject(project);
-	}*/
+	public void updateProject(Project project) throws Exception{
+        projectDao.updateProject(project);
+	}
+	
+	/* 
+     * The assign method is used to select a record based on the key the user 
+	 * provides, finds and then assigns the values 
+     */
+	/*
+	 * public void assignEmployee(int employeeId, int projectId) throws Exception {
+	 * projectDao.assignEmployee(employeeId, projectId); }
+	 */
 	
 	 /* 
      * This method validates the given date of project  

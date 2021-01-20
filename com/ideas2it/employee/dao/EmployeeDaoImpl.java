@@ -20,6 +20,7 @@ import org.hibernate.Transaction;
 import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
 import com.ideas2it.hibernateconnection.SessionManagement;
+import com.ideas2it.project.model.Project;
 
 /*
  * This class contains the list of Employees and the details of Employees
@@ -168,6 +169,36 @@ public class EmployeeDaoImpl implements EmployeeDao {
             employee.setAddress(addressSet);
             session.saveOrUpdate(currentAddress);
             session.saveOrUpdate(permanentAddress);
+            transaction.commit();
+        } catch (Exception ex) {
+            System.out.println("unable to add User value" + ex);
+        } finally {
+            session.close();
+        }
+    }
+    
+    /*
+     * Used to assign the values from the database given
+     * provided by user
+     */
+    public void assignProject(int employeeId, int projectId) throws Exception{
+    	Session session = null;
+        Transaction transaction = null;
+        try {
+            SessionFactory sessionFactory = SessionManagement.getSessionFactory();
+            System.out.println(sessionFactory);
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from Project project where project.projectId = :projectId");
+            query.setParameter("projectId",projectId);
+            Project project = (Project) query.uniqueResult();
+            Query querys = session.createQuery("from Employee employee where employee.eid = :employeeId");
+            querys.setParameter("employeeId",employeeId);
+            Employee employee = (Employee) querys.uniqueResult();
+            Set <Project> projectSet = employee.getProject();
+            projectSet.add(project);
+            employee.setProject(projectSet);
+            session.saveOrUpdate(employee);
+            transaction = session.beginTransaction();
             transaction.commit();
         } catch (Exception ex) {
             System.out.println("unable to add User value" + ex);

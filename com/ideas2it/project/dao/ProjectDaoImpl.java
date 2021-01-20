@@ -61,12 +61,12 @@ public class ProjectDaoImpl implements ProjectDao {
         }
         
     }
+    
     /*
      * Used to delete the values into the database given
      * by the id provided by user
      * @param it gets the id of Employees for deleting
      */   
-
     public void deleteProject(int id) {
     	int noOfRowAffected = 0;
         Session session = null;
@@ -145,33 +145,43 @@ public class ProjectDaoImpl implements ProjectDao {
      * Used to update the values from the database given
      * provided by user
      */
-    /*public void updateProject(Project project) {
+    public void updateProject(Project project) {
         Session session = null;
         Transaction transaction = null;
         try {
-            System.out.println("Inside Dao"+employee.getEid());
+            System.out.println("Inside Dao"+project.getProjectId());
             SessionFactory sessionFactory = SessionManagement.getSessionFactory();
             System.out.println(sessionFactory);
             session = sessionFactory.openSession();
-            employee.setStatus("active");
-            System.out.println(employee.getStatus());
+            project.setStatus("active");
+            System.out.println(project.getStatus());
             transaction = session.beginTransaction();
-            session.saveOrUpdate(employee); 
-            currentAddress.setEmployee(employee);
-            permanentAddress.setEmployee(employee);
-            Set addressSet = new HashSet();
-            addressSet.add(currentAddress);
-            addressSet.add(permanentAddress);
-            employee.setAddress(addressSet);
-            session.saveOrUpdate(currentAddress);
-            session.saveOrUpdate(permanentAddress);
+            session.saveOrUpdate(project); 
             transaction.commit();
         } catch (Exception ex) {
             System.out.println("unable to add User value" + ex);
         } finally {
             session.close();
         }
-}*/
+}
+	/*
+	 * public void assignEmployee(int employeeId, int projectId) throws Exception{
+	 * Session session = null; Transaction transaction = null; try { SessionFactory
+	 * sessionFactory = SessionManagement.getSessionFactory();
+	 * System.out.println(sessionFactory); session = sessionFactory.openSession();
+	 * Query query =
+	 * session.createQuery("from Employee employee where employee.eid = :employeeId"
+	 * ); query.setParameter("employeeId",employeeId); Project project = (Project)
+	 * query.uniqueResult(); Query querys = session.
+	 * createQuery("from Project project where project.projectId = :projectId");
+	 * querys.setParameter("projectId",projectId); Project project1 = (Project)
+	 * querys.uniqueResult(); Set <Project> projectSet = project.getEmployee();
+	 * projectSet.add(project1); project.setEmployee(projectSet);
+	 * session.saveOrUpdate(project); transaction = session.beginTransaction();
+	 * transaction.commit(); } catch (Exception ex) {
+	 * System.out.println("unable to add User value" + ex); } finally {
+	 * session.close(); } }
+	 */
    
 }
 

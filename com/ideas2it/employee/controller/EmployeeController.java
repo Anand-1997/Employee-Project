@@ -13,6 +13,7 @@ import com.ideas2it.employee.model.Address;
 import com.ideas2it.employee.model.Employee;
 import com.ideas2it.employee.service.EmployeeService;
 import com.ideas2it.employee.service.EmployeeServiceImpl;
+import com.ideas2it.project.model.Project;
 
 /*
  * This class gives the user to perform all the
@@ -40,7 +41,8 @@ public class EmployeeController {
 				System.out.println("3) Retrive an employee via ID.");
 				System.out.println("4) List all employees.");
 				System.out.println("5) update employee.");
-				System.out.println("6) Exit.");
+				System.out.println("6) Assign Project.");
+				System.out.println("7) Exit.");
 				Scanner scanner = new Scanner(System.in);
 				options = scanner.nextInt();
 				switch (options) {
@@ -67,10 +69,17 @@ public class EmployeeController {
 					permanentAddress = getEmployeeAddress();
 					employeeService.updateEmployee(employee,currentAddress,permanentAddress);//Calls the update method
 					break;
+				case 6:
+					employeeId = getEmployeeId();
+					int projectId = getProjectId();
+					employeeService.assignProject(employeeId,projectId);
+					break;
+				case 7:
+					break;
 				default:
 					System.out.println("Invalid Choice"); //If none of the options exits*/
 				}
-		} while(options!=6);
+		} while(options!=7);
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -154,5 +163,15 @@ public class EmployeeController {
 		employee = employeeService.setEmployeeDetails(firstName, lastName, dateOfBirth, email, phoneNumber);
 		employee.setEid(employeeId);
 		return employee;
+	}
+	
+	/*
+     * This method fetches the Project ID from user 
+     */
+	public int getProjectId() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Please enter the ID of an Project");
+		int projectId = scanner.nextInt();
+		return projectId;
 	}
 }

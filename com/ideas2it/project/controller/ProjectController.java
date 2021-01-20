@@ -41,7 +41,8 @@ public class ProjectController {
 				System.out.println("3) Retrive an project via ID.");
 				System.out.println("4) List all projects.");
 				System.out.println("5) update project.");
-				System.out.println("6) Exit.");
+				System.out.println("6) Assign Project.");
+				System.out.println("7) Exit.");
 				Scanner scanner = new Scanner(System.in);
 				options = scanner.nextInt();
 				switch (options) {			
@@ -70,14 +71,21 @@ public class ProjectController {
 				case 4:
 					projectService.listProject(); //Calls the list method
 					break;
-				/*case 5:
+				case 5:
 					updateProject();
 					projectService.updateProject(project); //Calls the update method
-					break;*/
+					break;
+				case 6:
+					int employeeId = getEmployeeId();
+					projectId = getProjectId();
+					//projectService.assignEmployee(employeeId,projectId);
+					break;
+				case 7:
+					break;
 				default:
 					System.out.println("Invalid Choice"); //If none of the options exits*/
 				}
-			} while(options!=6);
+			} while(options!=7);
 			} catch(Exception e) {
 				System.out.println("Invalid entry");
 			}
@@ -104,7 +112,7 @@ public class ProjectController {
      */
 	public int getProjectId() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Please enter the ID of an employee");
+		System.out.println("Please enter the ID of an project");
 		int projectId = scanner.nextInt();
 		return projectId;
 	}
@@ -125,7 +133,19 @@ public class ProjectController {
 		 projectService.validateDate(dueDate);
 	     System.out.println("Enter Manager name: ");
 	     String managerName = scanner.nextLine();
+	     int pid = Integer.parseInt(id);
 	     project = projectService.setProjectDetails(name,dueDate,managerName );
+	     project.setProjectId(pid);
 	     return project;
     } 
+	 
+	/*
+	 * This method fetches the Employee ID from user 
+	 */
+	public int getEmployeeId() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Please enter the ID of an employee");
+		int employeeId = scanner.nextInt();
+		return employeeId;
+	}
 }
